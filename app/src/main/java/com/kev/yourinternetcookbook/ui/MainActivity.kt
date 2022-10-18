@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 				bottomNavigationView.visibility = View.GONE
 			}
 
-			if (nd.id == R.id.splashScreenFragment){
+			if (nd.id == R.id.splashScreenFragment ){
 				supportActionBar?.hide()
 			}
 			else{

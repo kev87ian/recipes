@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -24,6 +25,9 @@ class MealCategoriesFragment : Fragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+
+		//sets the toolbar title
+		(activity as AppCompatActivity).supportActionBar?.title = "Meal Categories"
 
 		binding.btnRetryMealCategories.setOnClickListener {
 			retryNetworkCall()

@@ -2,6 +2,7 @@ package com.kev.yourinternetcookbook.ui.fragments.mealFragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -27,6 +28,10 @@ class SearchMealsFragment : Fragment(R.layout.fragment_search_results) {
 
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+		//sets the toolbar title
+		(activity as AppCompatActivity).supportActionBar?.title = "Search Recipes"
+
 		super.onViewCreated(view, savedInstanceState)
 		_binding = FragmentSearchResultsBinding.bind(view)
 		setupRecyclerview()

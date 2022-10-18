@@ -21,13 +21,13 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen), Coroutin
 	private var _binding : FragmentSplashScreenBinding? = null
 	private val binding get() = _binding!!
 
-	lateinit var firebaseAuth: FirebaseAuth
+	private lateinit var firebaseAuth: FirebaseAuth
 	override val coroutineContext: CoroutineContext
 		get() = Dispatchers.Main + Job()
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		launch {
-			delay(3000)
+			delay(2000)
 			withContext(Dispatchers.Main){
 				moveToNext()
 			}
