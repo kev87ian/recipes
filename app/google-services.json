@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "640559234496",
+    "project_id": "freecookbook-2e38a",
+    "storage_bucket": "freecookbook-2e38a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640559234496:android:28b9e2be4cb69dda2c1c25",
+        "android_client_info": {
+          "package_name": "com.kev.yourinternetcookbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "640559234496-ggn4867f2nj01nau290atvutqmsa6ldr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfj_MuJlf6Hq_GwqSpDUoSHpJtgiYgyLA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "640559234496-ggn4867f2nj01nau290atvutqmsa6ldr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

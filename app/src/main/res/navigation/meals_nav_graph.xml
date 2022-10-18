@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/meals_nav_graph.xml"
+    app:startDestination="@id/splashScreenFragment">
+
+    <fragment
+        android:id="@+id/mealCategoriesFragment"
+        android:name="com.kev.yourinternetcookbook.ui.fragments.mealFragments.MealCategoriesFragment"
+        android:label="Meal Categories"
+        tools:layout="@layout/fragment_meal_categories" >
+        <action
+            android:id="@+id/action_mealCategoriesFragment_to_mealsUnderCategoryFragment"
+            app:destination="@id/mealsUnderCategoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mealsUnderCategoryFragment"
+        android:name="com.kev.yourinternetcookbook.ui.fragments.mealFragments.MealsUnderCategoryFragment"
+        android:label="Meals"
+        tools:layout="@layout/fragment_meals_under_category" >
+        <action
+            android:id="@+id/action_mealsUnderCategoryFragment_to_mealDetailsFragment"
+            app:destination="@id/mealDetailsFragment" />
+        <argument
+            android:name="categoryName"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/mealDetailsFragment"
+        android:name="com.kev.yourinternetcookbook.ui.fragments.mealFragments.MealDetailsFragment"
+        android:label="fragment_meal_details"
+        tools:layout="@layout/fragment_meal_details" >
+        <argument
+            android:name="mealId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultsFragment"
+        android:name="com.kev.yourinternetcookbook.ui.fragments.mealFragments.SearchMealsFragment"
+        android:label="fragment_search_results"
+        tools:layout="@layout/fragment_search_results" >
+        <action
+            android:id="@+id/action_searchResultsFragment_to_mealDetailsFragment"
+            app:destination="@id/mealDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedRecipesFragment"
+        android:name="com.kev.yourinternetcookbook.ui.fragments.mealFragments.SavedRecipesFragment"
+        android:label="fragment_saved_recipes"
+        tools:layout="@layout/fragment_saved_recipes" >
+        <argument
+            android:name="mealId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_savedRecipesFragment_to_mealDetailsFragment"
+            app:destination="@id/mealDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.kev.yourinternetcookbook.ui.fragments.authFragments.SignInFragment"
+        android:label="SignInFragment" >
+        <action
+            android:id="@+id/action_signInFragment_to_mealCategoriesFragment"
+            app:destination="@id/mealCategoriesFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.kev.yourinternetcookbook.ui.fragments.authFragments.SignUpFragment"
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_mealCategoriesFragment"
+            app:destination="@id/mealCategoriesFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.kev.yourinternetcookbook.ui.fragments.authFragments.SplashScreenFragment"
+        android:label="SplashScreenFragment" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_signInFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/meals_nav_graph.xml"
+            app:popUpToInclusive="true"
+            app:destination="@id/signInFragment" />
+        <action
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/meals_nav_graph.xml"
+            android:id="@+id/action_splashScreenFragment_to_mealCategoriesFragment"
+            app:destination="@id/mealCategoriesFragment" />
+    </fragment>
+</navigation>
