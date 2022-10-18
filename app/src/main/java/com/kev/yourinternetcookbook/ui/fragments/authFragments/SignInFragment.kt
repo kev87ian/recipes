@@ -1,7 +1,6 @@
 package com.kev.yourinternetcookbook.ui.fragments.authFragments
 
 import android.os.Bundle
-import android.os.PatternMatcher
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +11,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.kev.yourinternetcookbook.R
 import com.kev.yourinternetcookbook.databinding.FragmentSignInBinding
+
 import com.kev.yourinternetcookbook.ui.viewmodels.AuthViewModel
 import com.kev.yourinternetcookbook.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.regex.Pattern
 
 @AndroidEntryPoint
 class SignInFragment : Fragment(R.layout.fragment_sign_in) {
@@ -43,9 +42,15 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 			signInUsers()
 		}
 
+		navigateToResetPassword()
+
 		setUpObserver()
 
 		super.onViewCreated(view, savedInstanceState)
+	}
+
+	private fun navigateToResetPassword() {
+		binding.forgotPassTxt.setOnClickListener { findNavController().navigate(R.id.action_signInFragment_to_resetPasswordFragment) }
 	}
 
 
@@ -84,12 +89,18 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
 
 		if (email.isEmpty() || password.isEmpty()) {
-			Toast.makeText(requireContext(), "Ensure all fields are filled, and password has more than 6 characters", Toast.LENGTH_SHORT).show()
-		}
-			else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-				Toast.makeText(requireContext(), "Ensure the email is correctly typed", Toast.LENGTH_SHORT).show()
-			}
-		 else if (password.length <= 5) {
+			Toast.makeText(
+				requireContext(),
+				"Ensure all fields are filled, and password has more than 6 characters",
+				Toast.LENGTH_SHORT
+			).show()
+		} else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+			Toast.makeText(
+				requireContext(),
+				"Ensure the email is correctly typed",
+				Toast.LENGTH_SHORT
+			).show()
+		} else if (password.length <= 5) {
 			Toast.makeText(
 				requireContext(),
 				"Password must contain at least 6 characters.",

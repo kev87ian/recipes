@@ -1,10 +1,7 @@
 package com.kev.yourinternetcookbook.repositories
 
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.FirebaseNetworkException
+import com.google.firebase.auth.*
 import com.kev.yourinternetcookbook.utils.Resource
 import com.kev.yourinternetcookbook.utils.await
 import java.io.IOException
@@ -19,13 +16,13 @@ class AuthRepository @Inject constructor(
 			val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
 			Resource.Success(result.user!!)
 		} catch (e: Exception) {
-				when(e){
-					is FirebaseAuthInvalidCredentialsException -> Resource.Error("Invalid credentials. Please try again.")
-					is IOException -> Resource.Error("Ensure you have an active internet connection")
-					is FirebaseAuthInvalidUserException -> Resource.Error("This account does not exists.")
+			when (e) {
+				is FirebaseAuthInvalidCredentialsException -> Resource.Error("Invalid credentials. Please try again.")
+				is FirebaseNetworkException -> Resource.Error("Ensure you have an active internet connection")
+				is FirebaseAuthInvalidUserException -> Resource.Error("This account does not exists.")
 
-					else -> Resource.Error(e.localizedMessage.toString())
-				}
+				else -> Resource.Error(e.localizedMessage.toString())
+			}
 		}
 	}
 
@@ -34,11 +31,10 @@ class AuthRepository @Inject constructor(
 			val result = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
 
 			return Resource.Success(result.user!!)
-		} catch (e: Exception){
+		} catch (e: Exception) {
 
-			when(e)
-			{
-				is IOException -> Resource.Error("Ensure you have an active internet connection.")
+			when (e) {
+				is FirebaseNetworkException -> Resource.Error("Ensure you have an active internet connection.")
 				is FirebaseAuthUserCollisionException -> Resource.Error("An account with this email already exists.")
 				else -> Resource.Error(e.localizedMessage)
 			}
@@ -46,7 +42,23 @@ class AuthRepository @Inject constructor(
 
 	}
 
-	fun logout(){
+	fun logout() {
 		firebaseAuth.signOut()
 	}
+
+	suspend fun resetPassword(email: String) : Resource<String> {
+		return try {
+			val result =firebaseAuth.sendPasswordResetEmail(email).await()
+			return Resource.Success("$result")
+		}
+		catch (e:Exception){
+			when(e){
+				is FirebaseNetworkException -> Resource.Error("Ensure you have an active internet connection")
+				is FirebaseAuthInvalidUserException -> Resource.Error("No account is associated with the email address.")
+				else -> Resource.Error(e.localizedMessage)
+			}
+		}
+	}
+
+
 }

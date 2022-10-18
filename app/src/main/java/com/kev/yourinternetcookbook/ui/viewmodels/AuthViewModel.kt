@@ -18,6 +18,7 @@ class AuthViewModel @Inject constructor(
 	val loginLiveData: MutableLiveData<Resource<FirebaseUser>?> = MutableLiveData()
 	val signUpLiveData: MutableLiveData<Resource<FirebaseUser>?> = MutableLiveData()
 
+	val resetPasswordLiveData: MutableLiveData<Resource<String>> = MutableLiveData()
 
 	fun loginUser(email: String, password: String) = viewModelScope.launch {
 		loginLiveData.postValue(Resource.Loading())
@@ -30,5 +31,13 @@ class AuthViewModel @Inject constructor(
 		signUpLiveData.postValue(Resource.Loading())
 		val result = repository.signUp(email, password)
 		signUpLiveData.postValue(result)
+	}
+
+	fun resetPassword(email: String) = viewModelScope.launch {
+		resetPasswordLiveData.postValue(Resource.Loading())
+		val result = repository.resetPassword(email)
+		resetPasswordLiveData.postValue(result)
+
+
 	}
 }

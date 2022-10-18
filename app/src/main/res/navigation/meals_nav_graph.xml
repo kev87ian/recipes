@@ -66,6 +66,9 @@
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -94,5 +97,18 @@
             app:popUpTo="@id/meals_nav_graph.xml"
             android:id="@+id/action_splashScreenFragment_to_mealCategoriesFragment"
             app:destination="@id/mealCategoriesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="com.kev.yourinternetcookbook.ui.fragments.authFragments.ResetPasswordFragment"
+        android:label="ResetPasswordFragment">
+
+        <action
+            android:id="@+id/action_resetPasswordFragment_to_signInFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/meals_nav_graph.xml"
+            app:popUpToInclusive="true"
+            app:destination="@id/signInFragment" />
+
     </fragment>
 </navigation>
